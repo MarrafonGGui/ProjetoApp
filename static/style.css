@@ -1,0 +1,53 @@
+
+.btn-outline-danger{
+    margin-right: 5px; /* Adiciona espaço à direita */
+}
+
+.btn-outline-danger:hover {
+    color: black !important;   /* força a cor preta */
+    border-color: black !important; /* opcional: muda a borda para combinar */
+}
+
+.btn-outline-success{
+    margin-right: 5px; /* Adiciona espaço à direita */
+}
+
+.btn-outline-success:hover {
+    color: black !important;   /* força a cor preta */
+    border-color: black !important; /* opcional: muda a borda para combinar */
+}
+
+.ipt-cadastro{
+    width: 300px;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgb(53, 67, 80);
+    color: white
+}
+
+.sell-quest{
+    text-align: center;
+    font-size: 30px;
+    /* padding-left: 250px */
+}
+.home-buttons{
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+}
+.venda{
+    text-align: center;
+    font-size: 50px;
+    color: linear-gradient(to right, #005f00, #47fa95);
+}
+
+.div-id {
+    display: flex;
+    flex-direction: column; /* Alinha os itens em linha */
+    align-items: center; /* Alinha os itens à esquerda */
+}
+.div-int {
+    display: flex;
+    flex-direction: column; /* Alinha os itens em linha */
+    /* align-items: flex-start; Alinha os itens à esquerda */
+}

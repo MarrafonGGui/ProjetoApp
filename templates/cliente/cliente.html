@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Flask</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-dark text-white text-center">
+
+    <div class="container mt-5">
+        <h1>🔥 Clientes gamers a 1 km com Flask!</h1>
+        <p>Seu HTML foi carregado corretamente.</p>
+        
+        <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/'">
+            Home
+        </button>
+        <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/cliente/cadastro'">
+            Cadastrar
+        </button>
+        <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/cliente/lista'">
+            Listar
+        </button>
+    </div>
+
+</body>
+</html>

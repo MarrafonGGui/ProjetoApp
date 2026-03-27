@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Flask</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-dark text-white text-center">
+
+    <div class="container mt-5">
+        <button class="btn btn-outline-danger btn-lg home-buttons" onclick="window.location.href='/produtos/lista'">
+            Voltar
+        </button>
+        <h1>🔥 Produtos em Falta com Flask!</h1>
+        <p>Seu HTML foi carregado corretamente.</p>
+        <p>Estamos falidos</p>
+
+        <h1>Editar Produto</h1>
+
+        <form method="POST">
+            <input class="ipt-cadastro"  type="text" name="nome" value="{{ produto.nome_produto }}" required><br>
+            <input class="ipt-cadastro"  type="number" step="0.01" name="preco" value="{{ produto.preco }}" required><br>
+            <input class="ipt-cadastro"  type="number" name="quantidade" value="{{ produto.quantidade }}" required><br><br>
+
+            <button class="btn btn-outline-success btn-lg" type="submit">Alterar</button>
+        </form><hr>
+        <form method="POST" action="{{ url_for('produtossite.deletar_produto', id_produto=produto.id_produto) }}">
+            <button type="submit" class="btn btn-outline-danger btn-lg" onclick="return confirm('Deseja excluir este produto?')">
+                Excluir Produto
+            </button>
+        </form>
+        
+
+    </div>
+
+</body>
+</html>
