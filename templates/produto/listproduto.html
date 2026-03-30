@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste Flask</title>
-
-    <!-- Bootstrap -->
+    <title>Listagem de Produtos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="bg-dark text-white text-center">
 
     <div class="container mt-5">
-        <h1>🔥 Produtos em Falta com Flask!</h1>
+        <h1>🔥 Listagem de Produtos com Flask!</h1>
         <p>Seu HTML foi carregado corretamente.</p>
         <p>Estamos falidos</p>
 
@@ -28,21 +26,9 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for produto in produtos %}
-                <tr>
-                    <td>{{ produto.id_produto }}</td>
-                    <td>{{ produto.nome_produto }}</td>
-                    <td>R$ {{ "%.2f"|format(produto.preco) }}</td>
-                    <td>{{ produto.quantidade }}</td>
-                    <td>
-                        <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='/produtos/editar/{{ produto.id_produto }}'">
-                            Editar
-                        </button>
-                </tr>
-                {% endfor %}
-            </tbody>    
+            <tbody id="tabela-produtos"></tbody>
         </table>
+ 
         <br><hr>
         <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/'">
             Home
@@ -54,6 +40,10 @@
             Cadastrar
         </button>
     </div>
+    <script src="{{ url_for('static', filename='script-produtos.js') }}"></script>
+    <script>
+        carregarProdutos();
+    </script>
 
 </body>
 </html>

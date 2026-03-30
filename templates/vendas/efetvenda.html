@@ -10,67 +10,36 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="bg-dark text-white text-center">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <script>
-                alert("{{ messages[0] }}");
-            </script>
-        {% endif %}
-    {% endwith %}
-    
+
     <div class="container mt-5">
         <div class="home-buttons">
-            <button class="btn btn-outline-danger btn-lg"onclick="window.location.href='/'">
-                Home
-            </button>
-            <button class="btn btn-outline-danger btn-lg"onclick="window.location.href='/vendas/lista'">
-                Listar Vendas
-            </button>
+            <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/'">Home</button>
+            <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/vendas/lista'">Listar Vendas</button>
         </div>
         <h1>Nova Venda</h1>
-
-        <form method="POST" class="sell-quest">
-            
-            <label class="sell-quest">Cliente:</label><br>
-            <select name="id_cliente" class="ipt-cadastro" required>
-                {% for c in clientes %}
-                    <option class="form-control ipt-cadastro" value="{{ c.id_cliente }}">{{ c.nome }}</option>
-                {% endfor %}
-            </select>
-            <br><br>
-            <div id="produtos-container">
-                <div class="produto-item">
-                    <label>Produto:</label>
-                    <select name="id_produto[]" class="ipt-cadastro">
-                        {% for p in produtos %}
-                            <option value="{{ p.id_produto }}">
-                                {{ p.nome_produto }} - R$ {{ p.preco }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                    <label>Quantidade:</label>
-                    <input type="number" class="ipt-cadastro" name="quantidade[]" placeholder="Quantidade" min="1"  value="1" required>
-
-                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="removerProduto(this)">
-                        Remover Produto
-                    </button>
-                </div>
-                
-            </div> 
-            <br>
-                <button type="button" onclick="adicionarProduto()" class="btn btn-outline-success btn-lg">
-                    Adicionar Produto++
-                </button>
-            
-            <br><br>
-            <button type="submit" class="btn btn-outline-primary btn-lg">
-                Finalizar Venda
-            </button>
-        </form>
+ 
+        <label class="sell-quest">Cliente:</label><br>
+        <select id="id_cliente" class="ipt-cadastro" required>
+            <option value="">Carregando...</option>
+        </select>
+        <br><br>
+ 
+        <div id="produtos-container">
+            <!-- itens dinâmicos serão inseridos aqui -->
+        </div>
+        <br>
+        <button type="button" onclick="adicionarProduto()" class="btn btn-outline-success btn-lg">
+            Adicionar Produto++
+        </button>
+        <br><br>
+        <button type="button" onclick="finalizarVenda()" class="btn btn-outline-primary btn-lg">
+            Finalizar Venda
+        </button>
     </div>
 </body>
+<script src="{{ url_for('static', filename='script-vendas.js') }}"></script>
 <script>
-    const produtos = {{ produtos_json | tojson }};
+    let produtos = [];
+    carregarDados();
 </script>
-<script src="{{ url_for('static', filename='script.js') }}"></script>
 </html>

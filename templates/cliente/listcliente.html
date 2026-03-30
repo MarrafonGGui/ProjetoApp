@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste Flask</title>
-
-    <!-- Bootstrap -->
+    <title>Lista de Clientes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="bg-dark text-white text-center">
 
     <div class="container mt-5">
-        <h1>🔥 Clientes gamers a 1 km com Flask!</h1>
-        <p>Seu HTML foi carregado corretamente.</p>
+        <h1>Clientes gamers a 1 km com Flask!</h1>
 
         <table class="table table-dark table-striped">
             <thead class="table-warning">
@@ -24,20 +21,7 @@
                     <th>Ações</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for cliente in clientes %}
-                <tr>
-                    <td>{{ cliente.id_cliente }}</td>
-                    <td>{{ cliente.nome }}</td>
-                    <td>{{ cliente.email }}</td>
-                    <td>
-                        <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='/cliente/editar/{{ cliente.id_cliente }}'">
-                            Editar
-                        </button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
+            <tbody id="tabela-clientes"></tbody>
         </table>
 
         <br><hr>
@@ -51,6 +35,9 @@
             Cadastrar
         </button>
     </div>
-
+    <script src="{{ url_for('static', filename='script-clientes.js') }}"></script>
+    <script>
+        carregarClientes();
+    </script>
 </body>
 </html>

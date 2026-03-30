@@ -14,30 +14,18 @@
     <div class="container mt-5">
         <h1>Lista de Vendas</h1>
 
-        <Table class="table table-dark table-striped">
+        <table class="table table-dark table-striped">
             <thead class="table-warning">
                 <tr>
                     <th>Id</th>
                     <th>Data</th>
+                    <th>Cliente</th>
                     <th>Total</th>
                     <th>Ações</th>
-
                 </tr>
             </thead>
-            <tbody>
-                {% for venda in vendas %}
-                    <tr>
-                        <td>{{ venda.id_venda }}</td>
-                        <td>{{ venda.data_venda.strftime("%d/%m/%Y %H:%M") }}</td>
-                        <td>R$ {{ "%.2f"|format(venda.preco_total) }}</td>
-                        <td><button class="btn btn-outline-primary btn-sm" onclick="window.location.href='/vendas/acessar/{{venda.id_venda}}'">
-                                Acessar Venda
-                            </button>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </Table>
+            <tbody id="tabela-vendas"></tbody>
+        </table>
 
         <button class="btn btn-outline-danger btn-lg"onclick="window.location.href='/'">
             Home
@@ -49,6 +37,9 @@
             Efetuar Venda
         </button>
     </div>
-
+<script src="{{ url_for('static', filename='script-vendas.js') }}"></script>
+<script>
+        carregarVendas();
+</script>
 </body>
 </html>

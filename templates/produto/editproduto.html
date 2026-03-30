@@ -21,21 +21,19 @@
 
         <h1>Editar Produto</h1>
 
-        <form method="POST">
-            <input class="ipt-cadastro"  type="text" name="nome" value="{{ produto.nome_produto }}" required><br>
-            <input class="ipt-cadastro"  type="number" step="0.01" name="preco" value="{{ produto.preco }}" required><br>
-            <input class="ipt-cadastro"  type="number" name="quantidade" value="{{ produto.quantidade }}" required><br><br>
-
-            <button class="btn btn-outline-success btn-lg" type="submit">Alterar</button>
-        </form><hr>
-        <form method="POST" action="{{ url_for('produtossite.deletar_produto', id_produto=produto.id_produto) }}">
-            <button type="submit" class="btn btn-outline-danger btn-lg" onclick="return confirm('Deseja excluir este produto?')">
-                Excluir Produto
-            </button>
-        </form>
-        
+        <input class="ipt-cadastro" type="text" id="nome" placeholder="Nome" required><br><br>
+        <input class="ipt-cadastro" type="number" step="0.01" id="preco" placeholder="Preço" required><br><br>
+        <input class="ipt-cadastro" type="number" id="quantidade" placeholder="Quantidade" required><br><br>
+        <button class="btn btn-outline-success btn-lg" onclick="editar()">Alterar</button>
+ 
+        <hr>
+        <button class="btn btn-outline-danger btn-lg" onclick="deletar()">Excluir Produto</button>
 
     </div>
-
+    <script src="{{ url_for('static', filename='script-produtos.js') }}"></script>
+    <script>
+        const id = window.location.pathname.split("/").pop();
+        carregarProduto();
+    </script>
 </body>
 </html>

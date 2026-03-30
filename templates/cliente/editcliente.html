@@ -14,29 +14,31 @@
     <div class="container mt-5">
         <h1>🔥Editar Cliente🔥</h1>
 
-        <form method="POST">
             <div class="div-id">
                 <div class="div-int">
                     <a class="badge text-bg-danger" style="font-size: 15px;">ID(o ID é único e não pode ser alterado):</a>
-                    <a type="text" style="font-size: 30px;" class="badge text-bg">{{ cliente.id_cliente }}</a>
+                    <a style="font-size: 30px;" class="badge text-bg" id="display-id"></a>
                 </div> <br>
                 <div class="div-int">
-                    <a class="badge text-bg-danger" style="font-size: 15px;">ICPF(o CPF é único e não pode ser alterado):</a>
-                    <a type="text" style="font-size: 30px;">{{ cliente.cpf }}</a>
+                    <a class="badge text-bg-danger" style="font-size: 15px;">CPF(o CPF é único e não pode ser alterado):</a>
+                    <a style="font-size: 30px;" class="badge text-bg" id="display-cpf"></a>
                 </div><br><br>
             </div>
-            <input class="ipt-cadastro"  type="text" name="nome" value="{{ cliente.nome }}" required><br>
-            <input class="ipt-cadastro"  type="email" name="email" value="{{ cliente.email }}" required><br><br>
+            <input class="ipt-cadastro"  type="text" id="nome" placeholder="Nome" required><br>
+            <input class="ipt-cadastro"  type="email" id="email" placeholder="Email"required><br><br>
 
-            <button class="btn btn-outline-success btn-lg" type="submit">Alterar</button>
-        </form>
+            <button class="btn btn-outline-success btn-lg" onclick="editar()">
+                Alterar
+            </button>
         <br><hr>
-        <form method="POST" action="{{ url_for('clientesite.deletar_cliente', id_cliente=cliente.id_cliente) }}">
-            <button type="submit" class="btn btn-outline-danger btn-lg" onclick="return confirm('Deseja excluir este cliente?')">
+            <button class="btn btn-outline-danger btn-lg" onclick="deletar()">
                 Excluir Cliente
             </button>
-        </form>
     </div>
-
+    <script src="{{ url_for('static', filename='script-clientes.js') }}"></script>
+    <script>
+        const id = window.location.pathname.split("/").pop();
+        carregarCliente(); 
+    </script>
 </body>
 </html>
