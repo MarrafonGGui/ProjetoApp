@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from model import db, Cliente
+from routes.api.login_api import login_required, admin_required
 
 clienteapi = Blueprint("clienteapi", __name__)
 
@@ -19,6 +20,7 @@ def validar_cpf(cpf):
 
 # LISTAR
 @clienteapi.route("/clientes", methods=["GET"])
+@login_required
 def get_clientes():
     clientes = Cliente.query.all()
     return jsonify([
@@ -31,6 +33,7 @@ def get_clientes():
     
 # CRIAR
 @clienteapi.route("/clientes", methods=["POST"])
+@login_required
 def create_cliente():
     data = request.get_json()
     cpf = ''.join(filter(str.isdigit, data.get("cpf", "")))
@@ -48,6 +51,7 @@ def create_cliente():
  
 # ATUALIZAR
 @clienteapi.route("/clientes/<int:id>", methods=["PUT"])
+@admin_required
 def update_cliente(id):
     cliente = Cliente.query.get_or_404(id)
     data = request.get_json()
@@ -61,6 +65,7 @@ def update_cliente(id):
 
 # DELETAR
 @clienteapi.route("/clientes/<int:id>", methods=["DELETE"])
+@admin_required
 def delete_cliente(id):
     cliente = Cliente.query.get_or_404(id)
 
@@ -71,6 +76,7 @@ def delete_cliente(id):
 
 # BUSCAR
 @clienteapi.route("/clientes/<int:id>", methods=["GET"])
+@admin_required
 def get_cliente(id):
     cliente = Cliente.query.get_or_404(id)
 

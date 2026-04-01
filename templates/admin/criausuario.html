@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Muito Foda com Flask</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-dark text-white text-center">
+
+    <div class="container mt-5">
+        <h1>Criar Usuário</h1>
+
+        <input class="ipt-cadastro" id="username" placeholder="Usuário"><br><br>
+        <input class="ipt-cadastro" id="password" type="password" placeholder="Senha"><br><br>
+
+        <label>
+            <input type="checkbox" id="is_admin"> Admin
+        </label>
+        <br><br>
+
+        <button class="btn btn-outline-success btn-lg" onclick="criarUsuario()">Criar</button>
+
+        <br><br>
+        <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/admin/gestao'">Voltar</button>
+    </div>
+
+</body>
+<script>
+    async function criarUsuario() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const is_admin = document.getElementById("is_admin").checked;
+
+        const res = await fetch("/api/admin/criar", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            credentials: "include",
+            body: JSON.stringify({ username, password, is_admin })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            alert("Usuário criado com sucesso!");
+        } else {
+            alert("Erro: " + data.error);
+        }
+    }
+</script>
+</html>

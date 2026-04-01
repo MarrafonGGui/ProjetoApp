@@ -1,11 +1,13 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from model import db, Venda, ItemVenda, Produto, Cliente
+from routes.api.login_api import login_required, admin_required
 
 vendasapi = Blueprint("vendasapi", __name__)
 
 
 # LISTAR
 @vendasapi.route("/vendas", methods=["GET"])
+@login_required
 def get_vendas():
     vendas = Venda.query.all()
     
@@ -21,9 +23,11 @@ def get_vendas():
 
 # CRIAR
 @vendasapi.route("/vendas", methods=["POST"])
-def create_venda():
+@login_required
+def efetuar_venda():
     data = request.get_json()
     id_cliente = data.get("id_cliente")
+    id_user = session.get("user_id")
     itens = data.get("itens", [])
 
     if not id_cliente or not itens:
@@ -46,7 +50,7 @@ def create_venda():
             return jsonify({"error": f"Estoque insuficiente para {produto.nome_produto}"}), 400
         total += produto.preco * qtd
 
-    venda = Venda(id_cliente=id_cliente, preco_total=total)
+    venda = Venda(id_cliente=id_cliente, id_user=id_user, preco_total=total)
     
     db.session.add(venda)
     db.session.commit()
@@ -58,7 +62,8 @@ def create_venda():
             id_venda=venda.id_venda,
             id_produto=produto.id_produto,
             quantidade=qtd,
-            preco_unitario=produto.preco
+            preco_unitario=produto.preco,
+            id_user=id_user
         )
         db.session.add(item)
 
@@ -68,6 +73,7 @@ def create_venda():
 
 # DELETAR
 @vendasapi.route("/vendas/<int:id>", methods=["DELETE"])
+@admin_required
 def delete_venda(id):
     venda = Venda.query.get_or_404(id)
     
@@ -83,6 +89,7 @@ def delete_venda(id):
 
 # BUSCAR
 @vendasapi.route("/vendas/<int:id>", methods=["GET"])
+@login_required
 def get_venda(id):
     venda = Venda.query.get_or_404(id)
     

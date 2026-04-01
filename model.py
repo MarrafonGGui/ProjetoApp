@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
@@ -31,10 +32,14 @@ class Venda(db.Model):
     id_venda = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
     id_cliente = db.Column(db.Integer, db.ForeignKey('clientes.id_cliente'), nullable=False)
+    
+    id_user = db.Column(db.Integer, db.ForeignKey('users.id_user'), nullable=False)
 
     preco_total = db.Column(db.Float, nullable=False)
     data_venda = db.Column(db.DateTime, default=datetime.utcnow)
+    
     itens = db.relationship("ItemVenda", backref="venda", cascade="all, delete-orphan")
+    user = db.relationship("User", backref="vendas")
     
     
 class ItemVenda(db.Model):
@@ -44,6 +49,24 @@ class ItemVenda(db.Model):
 
     id_venda = db.Column(db.Integer, db.ForeignKey('vendas.id_venda'), nullable=False)
     id_produto = db.Column(db.Integer, db.ForeignKey('produtos.id_produto'), nullable=False)
+    id_user = db.Column(db.Integer, db.ForeignKey('users.id_user'), nullable=False)
 
     quantidade = db.Column(db.Integer, nullable=False)
     preco_unitario = db.Column(db.Float, nullable=False)
+    
+    
+class User(db.Model):
+    __tablename__ = "users"
+
+    id_user = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    is_admin = db.Column(db.Boolean, default=False)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+    
+    itens = db.relationship("ItemVenda", backref="user")
+    
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)

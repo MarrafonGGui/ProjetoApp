@@ -91,6 +91,7 @@ async function finalizarVenda() {
     const res = await fetch("/api/vendas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ id_cliente: parseInt(id_cliente), itens })
     });
 
@@ -110,15 +111,15 @@ async function carregarVenda() {
     tbody.innerHTML = "";
     venda.itens.forEach(item => {
         tbody.innerHTML += `
-                    <tr>
-                        <td>${venda.id}</td>
-                        <td>${venda.data_venda}</td>
-                        <td>${venda.cliente}</td>
-                        <td>${item.nome_produto}</td>
-                        <td>${item.quantidade}</td>
-                        <td>R$ ${item.preco_unitario.toFixed(2)}</td>
-                        <td>R$ ${venda.preco_total.toFixed(2)}</td>
-                    </tr>`;
+        <tr>
+            <td>${venda.id}</td>
+            <td>${venda.data_venda}</td>
+            <td>${venda.cliente}</td>
+            <td>${item.nome_produto}</td>
+            <td>${item.quantidade}</td>
+            <td>R$ ${item.preco_unitario.toFixed(2)}</td>
+            <td>R$ ${venda.preco_total.toFixed(2)}</td>
+        </tr>`;
     });
 }
 

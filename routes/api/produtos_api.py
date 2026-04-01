@@ -1,11 +1,13 @@
 from flask import Blueprint, request, jsonify
 from model import db, Produto
+from routes.api.login_api import login_required, admin_required
 
 produtosapi = Blueprint("produtosapi", __name__)
 
 
 # LISTAR
 @produtosapi.route("/produtos", methods=["GET"])
+@login_required
 def get_produtos():
     produtos = Produto.query.all()
     
@@ -20,6 +22,7 @@ def get_produtos():
 
 # CRIAR
 @produtosapi.route("/produtos", methods=["POST"])
+@admin_required
 def create_produto():
     data = request.get_json()
     nome = data.get("nome", "").strip()
@@ -42,6 +45,7 @@ def create_produto():
 
 # ATUALIZAR
 @produtosapi.route("/produtos/<int:id>", methods=["PUT"])
+@admin_required
 def update_produto(id):
     produto = Produto.query.get_or_404(id)
     data = request.get_json()
@@ -57,6 +61,7 @@ def update_produto(id):
 
 # DELETAR
 @produtosapi.route("/produtos/<int:id>", methods=["DELETE"])
+@admin_required
 def delete_produto(id):
     produto = Produto.query.get_or_404(id)
     
@@ -68,6 +73,7 @@ def delete_produto(id):
 
 # BUSCAR
 @produtosapi.route("/produtos/<int:id>", methods=["GET"])
+@login_required
 def get_produto(id):
     produto = Produto.query.get_or_404(id)
     

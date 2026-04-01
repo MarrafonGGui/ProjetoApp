@@ -1,7 +1,9 @@
 from flask import Flask
+from routes.api.login_api import loginapi
 from routes.api.cliente_api import clienteapi
 from routes.api.produtos_api import produtosapi
 from routes.api.vendas_api import vendasapi
+from routes.login_routes import loginsite
 from routes.cliente_routes import clientesite 
 from routes.vendas_routes import vendassite 
 from routes.Produtos_routes import produtossite
@@ -19,11 +21,13 @@ def create_app():
 
     # HTML
     app.register_blueprint(homesite)
+    app.register_blueprint(loginsite)
     app.register_blueprint(clientesite, url_prefix="/cliente")
     app.register_blueprint(vendassite, url_prefix="/vendas")
     app.register_blueprint(produtossite, url_prefix="/produtos")
     
     # API
+    app.register_blueprint(loginapi, url_prefix="/api")
     app.register_blueprint(clienteapi, url_prefix="/api")
     app.register_blueprint(produtosapi, url_prefix="/api")
     app.register_blueprint(vendasapi, url_prefix="/api")

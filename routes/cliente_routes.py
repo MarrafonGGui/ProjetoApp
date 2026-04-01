@@ -1,4 +1,5 @@
-from flask import Blueprint, flash, render_template
+from flask import Blueprint, flash, render_template, session, redirect
+from routes.api.login_api import login_required, admin_required
 
 clientesite = Blueprint('clientesite', __name__)
 
@@ -8,17 +9,22 @@ def home_cliente():
 
 
 @clientesite.route("/cadastro")
+@login_required
 def cadastro_cliente():
     return render_template('cliente/cadcliente.html')
 
 
 @clientesite.route("/lista")
+@login_required
 def listar_clientes():
     return render_template('cliente/listcliente.html')
 
     
 @clientesite.route("/editar/<int:id_cliente>")
 def editar_cliente(id_cliente):
+    if not session.get("is_admin"):
+        flash("Acesso Restrito!!")
+        return redirect("/cliente/lista")
     return render_template("cliente/editcliente.html")
 
 
