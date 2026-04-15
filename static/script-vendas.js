@@ -14,7 +14,7 @@ async function carregarVendas() {
             <td>${v.cliente}</td>
             <td>R$ ${v.preco_total.toFixed(2)}</td>
             <td>
-                <button class="btn btn-outline-primary btn-sm"
+                <button class="btn btn-outline-info btn-sm"
                     onclick="window.location.href='/vendas/acessar/${v.id}'">
                     Acessar Venda
                 </button>

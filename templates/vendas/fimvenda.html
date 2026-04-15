@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendas Flask</title>
+    <title>SmartVendas</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,19 +12,24 @@
 <body class="bg-dark text-white text-center">
 
     <div class="container mt-5">
-        <h1>🔥 Falência, não tenho dinheiro com Flask!</h1>
-        <p>Seu HTML foi carregado corretamente.</p>
+        <div style="display: flex; justify-content: space-between;">
+            <button class="btn btn-outline-danger btn-lg"onclick="window.location.href='/'">
+                Home
+            </button>
+            <button class="btn btn-outline-warning btn-lg"onclick="window.location.href='/vendas/lista'">
+                Listar Vendas
+            </button>
+        </div><hr>
 
-        <p class="venda">Venda ID: {{ venda.id_venda }} realizada com sucesso!</p>
 
-        <button class="btn btn-outline-danger btn-lg"onclick="window.location.href='/'">
-            Home
-        </button>
-        <button class="btn btn-outline-danger btn-lg"onclick="window.location.href='/vendas/efetuar'">
+        <div class="venda">
+            <p>Venda ID: </p>
+            <p style="color: blue;">{{ venda.id_venda }}</p>
+            <p>realizada com sucesso!</p>
+        </div>
+
+        <button class="btn btn-outline-warning btn-lg"onclick="window.location.href='/vendas/efetuar'">
             Efetuar Nova Venda
-        </button>
-        <button class="btn btn-outline-danger btn-lg"onclick="window.location.href='/vendas/lista'">
-            Listar Vendas
         </button>
     </div>
 

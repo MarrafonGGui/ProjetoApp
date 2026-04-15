@@ -84,7 +84,7 @@ async function carregarProdutos() {
             <td>R$ ${p.preco.toFixed(2)}</td>
             <td>${p.quantidade}</td>
             <td>
-                <button class="btn btn-outline-primary btn-sm"
+                <button class="btn btn-outline-info btn-sm"
                     onclick="window.location.href='/produtos/editar/${p.id}'">
                     Editar
                 </button>

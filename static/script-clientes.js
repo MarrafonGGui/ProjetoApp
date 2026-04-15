@@ -37,7 +37,7 @@ async function carregarClientes() {
             <td>${c.nome}</td>
             <td>${c.email}</td>
             <td>
-                <button class="btn btn-outline-primary btn-sm" onclick="window.location.href='/cliente/editar/${c.id}'">
+                <button class="btn btn-outline-info btn-sm" onclick="window.location.href='/cliente/editar/${c.id}'">
                     Editar
                 </button>
             </td>
@@ -50,7 +50,7 @@ async function carregarCliente() {
     const res = await fetch(`/api/clientes/${id}`);
     const c = await res.json();
     document.getElementById("display-id").textContent = c.id;
-    document.getElementById("display-cpf").textContent = c.cpf;
+    // document.getElementById("display-cpf").textContent = c.cpf;
     document.getElementById("nome").value = c.nome;
     document.getElementById("email").value = c.email;
 }

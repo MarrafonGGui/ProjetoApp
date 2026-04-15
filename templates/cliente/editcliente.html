@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste Flask</title>
+    <title>SmartVendas</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,11 @@
 <body class="bg-dark text-white text-center">
 
     <div class="container mt-5">
-        <h1>🔥Editar Cliente🔥</h1>
+        <button class="btn btn-outline-danger btn-lg distant" onclick="window.location.href='/cliente/lista'">
+            Voltar
+        </button>
+        <hr>
+        <h1>Editar Cliente</h1><br>
 
             <div class="div-id">
                 <div class="div-int">
@@ -27,9 +31,9 @@
                     <a style="font-size: 30px;" class="badge text-bg" id="display-id"></a>
                 </div> <br>
                 <div class="div-int">
-                    <a class="badge text-bg-danger" style="font-size: 15px;">CPF(o CPF é único e não pode ser alterado):</a>
-                    <a style="font-size: 30px;" class="badge text-bg" id="display-cpf"></a>
-                </div><br><br>
+                    <a class="badge text-bg-danger" style="font-size: 15px;">CPF(o CPF é único e não pode ser alterado)</a>
+                    <a style="font-size: 30px;" class="badge text-bg">###.###.###-##</a>
+                </div><br>
             </div>
             <input class="ipt-cadastro"  type="text" id="nome" placeholder="Nome" required><br>
             <input class="ipt-cadastro"  type="email" id="email" placeholder="Email"required><br><br>
@@ -37,8 +41,8 @@
             <button class="btn btn-outline-success btn-lg" onclick="editar()">
                 Alterar
             </button>
-        <br><hr>
-            <button class="btn btn-outline-danger btn-lg" onclick="deletar()">
+        <br><hr><br>
+            <button class="btn btn-outline-danger" onclick="deletar()">
                 Excluir Cliente
             </button>
     </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendas Flask</title>
+    <title>SmartVendas</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,27 +12,37 @@
 <body class="bg-dark text-white text-center">
 
     <div class="container mt-5">
-        <div class="home-buttons">
-            <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/'">Home</button>
-            <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/vendas/lista'">Listar Vendas</button>
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                <button class="btn btn-outline-danger btn-lg" onclick="window.location.href='/'">
+                    Home
+                </button>
+                <button class="btn btn-outline-danger btn-lg distant"onclick="window.location.href='/vendas'">
+                    Voltar
+                </button>
+            </div>
+            <button class="btn btn-outline-warning btn-lg" onclick="window.location.href='/vendas/lista'">
+                Listar Vendas
+            </button>
         </div>
-        <h1>Nova Venda</h1>
+        <h1>Nova Venda</h1><hr>
  
         <label class="sell-quest">Cliente:</label><br>
         <select id="id_cliente" class="ipt-cadastro" required>
             <option value="">Carregando...</option>
         </select>
-        <br><br>
+        <br><br><hr>
  
         <div id="produtos-container"></div>
-        <br>
-        <button type="button" onclick="adicionarProduto()" class="btn btn-outline-success btn-lg">
-            Adicionar Produto++
-        </button>
-        <br><br>
-        <button type="button" onclick="finalizarVenda()" class="btn btn-outline-primary btn-lg">
-            Finalizar Venda
-        </button>
+        <hr><br>
+        <div style="display: flex; align-items: center; position: relative;">
+            <button type="button" onclick="adicionarProduto()" class="btn btn-outline-success btn-lg" style="margin: 0 auto;">
+                Adicionar Produto++
+            </button>
+            <button type="button" onclick="finalizarVenda()" class="btn btn-outline-primary btn-lg" style="position: absolute; right: 0 ;">
+                Finalizar Venda
+            </button>
+        </div>
     </div>
 </body>
 <script src="{{ url_for('static', filename='script-vendas.js') }}"></script>
